@@ -231,7 +231,19 @@ class alarm():
 
   def alarm_check3(self):
     ## This check queries for UA's that are listed in any blacklist_useragents.conf and do talk to cobaltstrike* paths on redirectors\n
-    keywords = ["curl","python"]
+    #keywords = ["curl","python"]
+    # We will dig trough ALL data finding specific IP related lines and tag them
+    fname = "/etc/redelk/rogue_useragents.conf"
+    with open(fname) as f:
+      content = f.readlines()
+    with open(fname) as f:
+      content = f.readlines()
+    uaList = []
+    for line in content:
+      if not line.startswith('#'):
+        ua = line.strip()
+        uaList.append(line.strip())
+    keywords = uaList
     # IF NO KEYWORDS EXIT
     qSub = ""
     for keyword in keywords:
